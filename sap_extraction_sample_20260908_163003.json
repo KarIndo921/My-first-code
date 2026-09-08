@@ -1,0 +1,149 @@
+{
+  "extraction_timestamp": "2026-09-08T16:30:03.581949",
+  "sap_system": "S/4HANA",
+  "environment": "Azure Cloud",
+  "connection_method": "odata",
+  "extraction_results": {
+    "material_classes": {
+      "total_count": 45,
+      "description": "All Material Classes (KLART) in the system",
+      "sample_data": [
+        {
+          "class_type": "001",
+          "class_description": "Raw Materials",
+          "batch_management": "X",
+          "variant_config": ""
+        },
+        {
+          "class_type": "002",
+          "class_description": "Finished Goods",
+          "batch_management": "",
+          "variant_config": "X"
+        },
+        {
+          "class_type": "003",
+          "class_description": "Components",
+          "batch_management": "X",
+          "variant_config": "X"
+        }
+      ]
+    },
+    "batch_managed_classes": {
+      "total_count": 12,
+      "description": "Material Classes with Batch Management enabled",
+      "batch_indicator_meanings": {
+        "X": "Batch management required",
+        "B": "Batch management relevant",
+        " ": "No batch management"
+      },
+      "sample_data": [
+        {
+          "class_type": "001",
+          "class_description": "Raw Materials",
+          "batch_indicator": "X"
+        },
+        {
+          "class_type": "003",
+          "class_description": "Components",
+          "batch_indicator": "X"
+        },
+        {
+          "class_type": "005",
+          "class_description": "Chemicals",
+          "batch_indicator": "B"
+        }
+      ]
+    },
+    "variant_classes": {
+      "total_count": 18,
+      "description": "Material Classes with Variant Configuration",
+      "variant_config_meanings": {
+        "X": "Variant configuration enabled",
+        " ": "No variant configuration"
+      },
+      "sample_data": [
+        {
+          "class_type": "002",
+          "class_description": "Finished Goods",
+          "variant_config": "X"
+        },
+        {
+          "class_type": "003",
+          "class_description": "Components",
+          "variant_config": "X"
+        },
+        {
+          "class_type": "008",
+          "class_description": "Configurable Products",
+          "variant_config": "X"
+        }
+      ]
+    },
+    "characteristics": {
+      "total_count": 156,
+      "description": "All Characteristics assigned to Material Classes",
+      "characteristics_per_class": {
+        "average": 3.5,
+        "minimum": 0,
+        "maximum": 12
+      },
+      "data_type_breakdown": {
+        "C": 67,
+        "N": 54,
+        "D": 22,
+        "T": 13
+      },
+      "sample_data": [
+        {
+          "class_type": "001",
+          "characteristic_id": "001",
+          "characteristic_name": "MATERIAL_WEIGHT",
+          "data_type": "N",
+          "required": "X",
+          "description": "Weight of material in kg"
+        },
+        {
+          "class_type": "001",
+          "characteristic_id": "002",
+          "characteristic_name": "MATERIAL_COLOR",
+          "data_type": "C",
+          "required": "",
+          "description": "Color of material"
+        },
+        {
+          "class_type": "002",
+          "characteristic_id": "010",
+          "characteristic_name": "EXPIRATION_DATE",
+          "data_type": "D",
+          "required": "X",
+          "description": "Product expiration date"
+        },
+        {
+          "class_type": "003",
+          "characteristic_id": "025",
+          "characteristic_name": "BATCH_SIZE",
+          "data_type": "N",
+          "required": "X",
+          "description": "Size of production batch"
+        }
+      ]
+    }
+  },
+  "summary": {
+    "total_material_classes": 45,
+    "batch_managed_classes_count": 12,
+    "batch_managed_percentage": "26.7%",
+    "variant_config_classes_count": 18,
+    "variant_config_percentage": "40.0%",
+    "total_characteristics": 156,
+    "average_characteristics_per_class": 3.5,
+    "classes_with_both_batch_and_variant": 6
+  },
+  "sap_tables_queried": [
+    "KLART",
+    "KSSK",
+    "CABN"
+  ],
+  "query_duration_seconds": 2.34,
+  "extraction_status": "SUCCESS"
+}

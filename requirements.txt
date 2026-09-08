@@ -1,0 +1,44 @@
+# SAP S/4HANA Material Extraction - Python Dependencies
+# For Azure connectivity and RFC/OData API integration
+
+# RFC Connection Library (Optional - for direct SAP RFC calls)
+# pyrfc==2.5.1  # Uncomment if using RFC connections
+# python-libsap==0.0.2  # Alternative RFC library
+
+# REST API & HTTP
+requests>=2.28.0
+urllib3>=1.26.0
+
+# Azure Integration
+azure-identity>=1.12.0
+azure-storage-blob>=12.13.0
+azure-keyvault-secrets>=4.4.0
+
+# Data Processing
+pandas>=1.5.0
+numpy>=1.23.0
+
+# XML/JSON Processing
+lxml>=4.9.0
+xmltodict>=0.13.0
+jsonschema>=4.17.0
+
+# Logging & Monitoring
+python-dotenv>=0.20.0
+
+# Testing
+pytest>=7.2.0
+pytest-cov>=4.0.0
+mock>=4.0.3
+
+# Code Quality
+black>=22.10.0
+flake8>=5.0.0
+pylint>=2.15.0
+
+# SAP OData Client (Optional - for OData API access)
+# pyodata>=1.13.0  # Uncomment for OData connectivity
+
+# Documentation
+sphinx>=5.3.0
+sphinx-rtd-theme>=1.1.0
