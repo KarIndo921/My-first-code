@@ -25,9 +25,11 @@ This project provides tools to extract and analyze:
 | File | Purpose |
 |------|---------|
 | `sap_material_extractor.py` | Core extraction logic with query templates |
-| `sap_connector_impl.py` | Connection implementations (RFC, OData) |
+| `sap_connector_impl.py` | Connection implementations for S/4HANA (RFC, OData) |
+| `sap_ecc_connector.py` | RFC-only connector for classic SAP ECC 6.0 / R/3 systems |
 | `test_extraction.py` | Test suite and sample report generation |
 | `SAP_EXTRACTION_GUIDE.md` | Detailed technical guide with SAP table structures |
+| `ECC_EXTRACTION_GUIDE.md` | ECC-specific connectivity notes (RFC, load balancing, SAProuter) |
 | `requirements.txt` | Python dependencies |
 | `README.md` | This file |
 
