@@ -1,0 +1,22 @@
+{
+  "l4_process": {
+    "l0_code": "CO",
+    "l0_name": "Commercial",
+    "l1_code": "OM",
+    "l1_name": "Order Management",
+    "l2_code": "OM-020",
+    "l2_name": "Sales Order Processing",
+    "l3_code": "OM-020-010",
+    "l3_name": "Create and Manage Sales Order",
+    "l4_code": "OM-020-010-080",
+    "l4_name": "Perform Availability Check",
+    "scenario": "Standard Sales Order to Cash",
+    "step_sequence": 3
+  },
+  "deliverables": {
+    "config_value_proposer_url": "https://claude.ai/code/artifact/9b8e2d13-2ed1-4709-986a-854b6a9b1025",
+    "config_proposal_workbook": "Config Proposals/Output/Config_Proposal_OM-020-010-080_Perform_Availability_Check.xlsx"
+  },
+  "connection_status": "S/4HANA host unreachable from this session - structural preview only",
+  "generated_at": "2026-09-09T15:41:12"
+}
