@@ -1,0 +1,71 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.14/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.14",
+  "version": "1.0.0",
+  "id": "12345678-1234-1234-1234-123456789012",
+  "packageName": "com.deloitte.lonawala.bot",
+  "developer": {
+    "name": "Deloitte",
+    "websiteUrl": "https://www.deloitte.com",
+    "privacyUrl": "https://www.deloitte.com/privacy",
+    "termsOfUseUrl": "https://www.deloitte.com/terms"
+  },
+  "name": {
+    "short": "Lonawala Location Bot",
+    "full": "Lonawala Location Guide & Suggestions Bot"
+  },
+  "description": {
+    "short": "Your personal guide to beautiful locations in Lonawala",
+    "full": "A Teams bot that provides location suggestions, maps, directions, and guidance for exploring beautiful places in Lonawala, India. Get recommendations, navigate to locations, and discover the best spots to visit."
+  },
+  "icons": {
+    "outline": "outline-icon.png",
+    "color": "color-icon.png"
+  },
+  "accentColor": "#004578",
+  "bots": [
+    {
+      "botId": "12345678-1234-1234-1234-123456789012",
+      "scopes": [
+        "team",
+        "personal",
+        "groupChat"
+      ],
+      "commandLists": [
+        {
+          "scopes": [
+            "team",
+            "personal",
+            "groupChat"
+          ],
+          "commands": [
+            {
+              "title": "Suggest Locations",
+              "description": "Get personalized location recommendations"
+            },
+            {
+              "title": "Show Maps",
+              "description": "Get directions to popular places"
+            },
+            {
+              "title": "Beautiful Places",
+              "description": "View all must-visit locations"
+            },
+            {
+              "title": "Help",
+              "description": "Get help about available commands"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": [
+    "*.azurewebsites.net",
+    "*.ngrok.io"
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "botName": {
+      "type": "string",
+      "defaultValue": "lonawala-location-bot",
+      "metadata": {
+        "description": "The name of the bot"
+      }
+    },
+    "location": {
+      "type": "string",
+      "defaultValue": "eastus",
+      "metadata": {
+        "description": "Location for all resources"
+      }
+    },
+    "appServicePlanSku": {
+      "type": "string",
+      "defaultValue": "F1",
+      "metadata": {
+        "description": "App Service Plan SKU (F1=Free, B1=Basic)"
+      }
+    }
+  },
+  "variables": {
+    "appServicePlanName": "[concat(parameters('botName'), '-plan')]",
+    "appServiceName": "[concat(parameters('botName'), '-app')]",
+    "botServiceName": "[concat(parameters('botName'), '-service')]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Web/serverfarms",
+      "apiVersion": "2021-02-01",
+      "name": "[variables('appServicePlanName')]",
+      "location": "[parameters('location')]",
+      "sku": {
+        "name": "[parameters('appServicePlanSku')]"
+      },
+      "properties": {
+        "reserved": true
+      },
+      "kind": "linux"
+    },
+    {
+      "type": "Microsoft.Web/sites",
+      "apiVersion": "2021-02-01",
+      "name": "[variables('appServiceName')]",
+      "location": "[parameters('location')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]"
+      ],
+      "properties": {
+        "serverFarmId": "[resourceId('Microsoft.Web/serverfarms', variables('appServicePlanName'))]",
+        "reserved": true
+      },
+      "kind": "app,linux"
+    },
+    {
+      "type": "Microsoft.BotService/botServices",
+      "apiVersion": "2021-03-01",
+      "name": "[variables('botServiceName')]",
+      "location": "global",
+      "dependsOn": [
+        "[resourceId('Microsoft.Web/sites', variables('appServiceName'))]"
+      ],
+      "properties": {
+        "displayName": "[parameters('botName')]",
+        "endpoint": "[concat('https://', reference(resourceId('Microsoft.Web/sites', variables('appServiceName'))).defaultHostName, '/api/messages')]",
+        "msaAppId": "",
+        "msaAppType": "MultiTenant",
+        "luisAppIds": [],
+        "schemaTransformationVersion": "1.3"
+      },
+      "kind": "sdk"
+    },
+    {
+      "type": "Microsoft.BotService/botServices/channels",
+      "apiVersion": "2021-03-01",
+      "name": "[concat(variables('botServiceName'), '/MsTeamsChannel')]",
+      "dependsOn": [
+        "[resourceId('Microsoft.BotService/botServices', variables('botServiceName'))]"
+      ],
+      "properties": {
+        "channelName": "MsTeamsChannel",
+        "location": "global",
+        "properties": {
+          "isEnabled": true
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "appServiceName": {
+      "type": "string",
+      "value": "[variables('appServiceName')]"
+    },
+    "appServiceUrl": {
+      "type": "string",
+      "value": "[concat('https://', reference(resourceId('Microsoft.Web/sites', variables('appServiceName'))).defaultHostName)]"
+    },
+    "botServiceName": {
+      "type": "string",
+      "value": "[variables('botServiceName')]"
+    }
+  }
+}
