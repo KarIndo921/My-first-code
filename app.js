@@ -242,8 +242,28 @@ function confirmSubmit() {
   const msg = unanswered > 0
     ? `You have ${unanswered} unanswered question(s). Submit anyway?`
     : "Submit your exam now?";
-  if (confirm(msg)) finishExam("manual");
+  showConfirmModal(msg, () => finishExam("manual"));
 }
+
+function showConfirmModal(message, onConfirm) {
+  document.getElementById("confirm-message").textContent = message;
+  document.getElementById("confirm-modal-overlay").classList.remove("hidden");
+  pendingConfirmAction = onConfirm;
+}
+
+let pendingConfirmAction = null;
+
+document.getElementById("confirm-modal-yes").addEventListener("click", () => {
+  document.getElementById("confirm-modal-overlay").classList.add("hidden");
+  const action = pendingConfirmAction;
+  pendingConfirmAction = null;
+  if (action) action();
+});
+
+document.getElementById("confirm-modal-no").addEventListener("click", () => {
+  document.getElementById("confirm-modal-overlay").classList.add("hidden");
+  pendingConfirmAction = null;
+});
 
 /* ---------------- proctoring ---------------- */
 
