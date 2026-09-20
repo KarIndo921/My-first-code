@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Certified Associate — Practice Exam</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ===================== START SCREEN ===================== -->
+<section id="screen-start" class="screen active">
+  <div class="card wide">
+    <h1>Claude Certified Associate Foundations</h1>
+    <p class="subtitle">Practice Exam Simulator</p>
+
+    <div class="rules">
+      <div class="rule"><span class="rule-num">60</span><span>random questions, drawn fresh from a bank of 140</span></div>
+      <div class="rule"><span class="rule-num">2h</span><span>time limit — auto-submits when the clock hits zero</span></div>
+      <div class="rule"><span class="rule-num">0</span><span>answers shown until you submit</span></div>
+    </div>
+
+    <ul class="notice-list">
+      <li>Once started, the exam runs in <strong>fullscreen</strong>. Leaving fullscreen, switching tabs, copying text, or opening dev tools is logged as a <strong>proctoring flag</strong>.</li>
+      <li>Your progress is saved locally so an accidental reload won't lose your answers — but reloading itself is still logged as a flag.</li>
+      <li>After you submit (or time runs out), you'll see your score, a pass/fail grade, a section-by-section breakdown, and which sections to focus your revision on.</li>
+    </ul>
+
+    <label class="consent">
+      <input type="checkbox" id="consent-check">
+      I understand this session will be monitored for exam integrity (tab switches, fullscreen exits, copy/paste, dev tools).
+    </label>
+
+    <button id="btn-start" class="btn btn-primary" disabled>Start Exam</button>
+  </div>
+</section>
+
+<!-- ===================== EXAM SCREEN ===================== -->
+<section id="screen-exam" class="screen">
+  <header class="exam-header">
+    <div class="exam-header-left">
+      <span class="badge" id="progress-badge">Question 1 / 60</span>
+    </div>
+    <div class="exam-header-center">
+      <span id="timer" class="timer">02:00:00</span>
+    </div>
+    <div class="exam-header-right">
+      <span id="flag-indicator" class="flag-indicator hidden">⚠ <span id="flag-count">0</span> flag(s)</span>
+      <button id="btn-submit" class="btn btn-danger btn-sm">Submit Exam</button>
+    </div>
+  </header>
+
+  <div class="exam-body">
+    <nav id="question-nav" class="question-nav"></nav>
+
+    <main class="question-panel">
+      <div class="question-meta">
+        <span id="q-section" class="pill"></span>
+        <span id="q-type" class="pill pill-muted"></span>
+      </div>
+      <h2 id="q-prompt" class="q-prompt"></h2>
+      <div id="q-options" class="q-options"></div>
+
+      <div class="question-footer">
+        <button id="btn-prev" class="btn btn-secondary">← Previous</button>
+        <button id="btn-clear" class="btn btn-ghost">Clear answer</button>
+        <button id="btn-next" class="btn btn-secondary">Next →</button>
+      </div>
+    </main>
+  </div>
+</section>
+
+<!-- ===================== PROCTOR WARNING OVERLAY ===================== -->
+<div id="proctor-overlay" class="proctor-overlay hidden">
+  <div class="proctor-box">
+    <h3>⚠ Proctoring Flag Recorded</h3>
+    <p id="proctor-message">Suspicious activity detected.</p>
+    <p class="proctor-sub">Repeated flags may auto-submit your exam.</p>
+    <button id="btn-resume" class="btn btn-primary">Resume Exam</button>
+  </div>
+</div>
+
+<!-- ===================== RESULTS SCREEN ===================== -->
+<section id="screen-results" class="screen">
+  <div class="card wide">
+    <div id="result-headline" class="result-headline">
+      <div class="result-grade" id="result-grade">PASS</div>
+      <div class="result-score">
+        <span id="result-score-num">0</span><span class="result-score-den">/1000</span>
+      </div>
+      <p id="result-sub"></p>
+    </div>
+
+    <div class="result-grid">
+      <div class="result-tile">
+        <div class="result-tile-num" id="stat-correct">0</div>
+        <div class="result-tile-label">Correct</div>
+      </div>
+      <div class="result-tile">
+        <div class="result-tile-num" id="stat-incorrect">0</div>
+        <div class="result-tile-label">Incorrect</div>
+      </div>
+      <div class="result-tile">
+        <div class="result-tile-num" id="stat-unanswered">0</div>
+        <div class="result-tile-label">Unanswered</div>
+      </div>
+      <div class="result-tile">
+        <div class="result-tile-num" id="stat-time">--</div>
+        <div class="result-tile-label">Time used</div>
+      </div>
+      <div class="result-tile">
+        <div class="result-tile-num" id="stat-flags">0</div>
+        <div class="result-tile-label">Proctoring flags</div>
+      </div>
+    </div>
+
+    <h3 class="section-title">Score by Section</h3>
+    <div id="section-breakdown" class="section-breakdown"></div>
+
+    <h3 class="section-title">Recommended Focus Areas</h3>
+    <div id="focus-suggestions" class="focus-suggestions"></div>
+
+    <div class="result-actions">
+      <button id="btn-review" class="btn btn-secondary">Review All Answers</button>
+      <button id="btn-retake" class="btn btn-primary">Retake with 60 New Questions</button>
+    </div>
+
+    <div id="review-panel" class="review-panel hidden"></div>
+  </div>
+</section>
+
+<script src="questions.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
