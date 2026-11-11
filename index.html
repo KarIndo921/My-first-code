@@ -127,6 +127,14 @@
       box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
     }
 
+    .btn-hero-share {
+      background: transparent;
+      color: #fffaf0;
+      border: 1.5px solid rgba(253, 230, 138, 0.6);
+    }
+
+    .btn-hero-share:hover { background: rgba(253, 230, 138, 0.12); }
+
     .btn-hero:hover { transform: translateY(-2px); }
 
     /* Trust Badges Bar */
@@ -707,6 +715,9 @@
         <a href="https://api.whatsapp.com/send?phone=919270494085&text=Hello%20Vandanaya%20Homemade%2C%20I%20would%20like%20to%20order%20Winter%20Laddoos%20in%20Pune" target="_blank" rel="noopener noreferrer" class="btn-hero btn-hero-wa">
           <i>💬</i> WhatsApp: 9270494085
         </a>
+        <button type="button" class="btn-hero btn-hero-share" onclick="shareSite()">
+          <i>🔗</i> Share This Page
+        </button>
       </div>
     </div>
   </header>
@@ -912,6 +923,37 @@
 
   <script>
     const WHATSAPP_NUMBER = "919270494085";
+
+    async function shareSite() {
+      const shareData = {
+        title: document.title,
+        text: 'Vandanaya "Aai che prem" Homemade Winter Laddoos — 100% homemade in Pune with pure A2 ghee. Order now!',
+        url: window.location.href
+      };
+
+      if (navigator.share) {
+        try {
+          await navigator.share(shareData);
+        } catch (err) {
+          if (err.name !== 'AbortError') {
+            console.error('Share failed:', err);
+          }
+        }
+        return;
+      }
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(shareData.url);
+          alert('Link copied to clipboard! Paste it anywhere to share this page.');
+          return;
+        } catch (err) {
+          console.error('Clipboard copy failed:', err);
+        }
+      }
+
+      window.prompt('Copy this link to share this page:', shareData.url);
+    }
 
     const products = [
       {
